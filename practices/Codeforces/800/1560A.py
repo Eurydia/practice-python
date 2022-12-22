@@ -6,7 +6,7 @@ lookup = tuple(
         lambda x: str(x)[-1] != "3",
         filter(
             lambda x: x % 3 != 0,
-            (i for i in range(1, 2000)),
+            (i for i in range(1, 1667)),
         ),
     )
 )
