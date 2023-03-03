@@ -6,5 +6,6 @@ for _ in range(t):
 
     if string.lower() == "yes":
         print("YES")
-    else:
-        print("NO")
+        continue
+
+    print("NO")
