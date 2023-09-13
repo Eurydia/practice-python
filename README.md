@@ -1,3 +1,3 @@
 # practice-python
 
-A small repository for archiving "Python". 
+A collection of Python exercises.
