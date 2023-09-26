@@ -1,3 +1,6 @@
+# https://codeforces.com/problemset/problem/339/B
+
+
 def main() -> None:
     n: int = int(input().split(" ")[0])
 
