@@ -1,35 +1,31 @@
 # https://codeforces.com/problemset/problem/189/A
 
+from typing import List
+
 
 def main() -> None:
-    [n, a, b, c] = list(map(int, input().split(" ")))
+    [n, a, b, c] = list(map(int, input().split()))
 
-    min_len: int = min(a, b, c)
-    med_len: int = min(max(a, b), max(b, c))
-    max_len: int = max(a, b, c)
+    ks: List[int] = [a, b, c]
+    ks.sort()
 
-    def cut(
-        curr_len: int,
-        curr_pieces: int,
-    ) -> int:
-        if curr_len - min_len >= 0:
-            return cut(
-                curr_len - min_len,
-                curr_pieces + 1,
-            )
-        if curr_len - med_len >= 0:
-            return cut(
-                curr_len - med_len,
-                curr_pieces + 1,
-            )
-        if curr_len - max_len >= 0:
-            return cut(
-                curr_len - max_len,
-                curr_pieces + 1,
-            )
-        return curr_pieces
+    longest = 0
+    for kx in range((n // ks[2]) + 1):
+        kx_len: int = kx * ks[2]
 
-    print(cut(n, 0))
+        for ky in range((n // ks[1]) + 1):
+            ky_len: int = ky * ks[1]
+
+            if ((n - kx_len - ky_len) % ks[0]) == 0:
+                kz: int = (n - kx_len - ky_len) // ks[0]
+
+                longest = max(
+                    kx + ky + kz,
+                    longest,
+                )
+                break
+
+    print(longest)
 
 
 if __name__ == "__main__":
