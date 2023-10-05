@@ -5,9 +5,16 @@ from typing import List, Dict
 lookup: Dict[int, int] = {}
 
 
-def compute_net_gain(ak: int) -> int:
-    if ak not in lookup:
+def solve(n: int) -> int:
+    # if n not in lookup:
+    #     return 0
+
+    if n == 1:
+        if n in lookup:
+            return lookup[1]
         return 0
+
+    return max(solve(n - 1), solve(n - 2) + lookup[n] * n)
 
 
 def main() -> None:
@@ -16,9 +23,10 @@ def main() -> None:
 
     for ak in a:
         if ak not in lookup:
-            lookup[ak] = ak
+            lookup[ak] = 1
         else:
-            lookup[ak] += ak
+            lookup[ak] += 1
+    print(solve(n))
 
 
 # 3 3 4 4 5
