@@ -35,10 +35,22 @@ def merge_sort(seq: list[int], n: int) -> list[int]:
     return sorted_seq
 
 
+def bubble_sort(xs: list[int], size: int) -> None:
+    for working_region_offset in range(size - 1):
+        for k in range(size - working_region_offset - 1):
+            a: int = xs[k]
+            b: int = xs[k + 1]
+            if a > b:
+                xs[k] = b
+                xs[k + 1] = a
+
+
 def main() -> None:
     k = [7, 5, 3, 2, 1]
     # max_selection_sort(k, 5)
-    print(merge_sort(k, 5))
+    # print(merge_sort(k, 5))
+    bubble_sort(k, 5)
+    print(k)
 
 
 if __name__ == "__main__":
