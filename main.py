@@ -1,15 +1,3 @@
-def max_selection_sort(seq: list[int], n: int) -> None:
-    for i in range(n):
-        max_val_index: int = 0
-        # optimized by starting j from 1 instead of 0
-        for j in range(1, n - i):
-            if seq[j] > seq[max_val_index]:
-                max_val_index = j
-        temp = seq[n - i - 1]
-        seq[n - i - 1] = seq[max_val_index]
-        seq[max_val_index] = temp
-
-
 def merge_sort(seq: list[int], n: int) -> list[int]:
     if n == 1:
         return seq
@@ -45,11 +33,97 @@ def bubble_sort(xs: list[int], size: int) -> None:
                 xs[k + 1] = a
 
 
+def insertion_sort(xs: list[int], size: int) -> None:
+    for p_idx in range(1, size):
+        p_val: int = xs[p_idx]
+
+        i: int = p_idx
+
+        while i > 0 and xs[i - 1] > p_val:
+            xs[i] = xs[i - 1]
+            i -= 1
+        xs[i] = p_val
+
+
+def __top_down_merge_sort(
+    xs: list[int], start_index: int, end_index: int
+) -> None:
+    if end_index - start_index == 0:
+        return
+
+    # if end_index - start_index == 1:
+    #     l: int = xs[start_index]
+    #     r: int = xs[end_index]
+    #     if l > r:
+    #         xs[start_index] = r
+    #         xs[end_index] = l
+    #         return
+    #     return
+
+    middle_index: int = (start_index + end_index) // 2
+
+    __top_down_merge_sort(
+        xs,
+        start_index,
+        middle_index,
+    )
+
+    __top_down_merge_sort(
+        xs,
+        middle_index + 1,
+        end_index,
+    )
+
+    l_ptr: int = start_index
+    r_ptr: int = middle_index + 1
+    aux: list[int] = []
+
+    while l_ptr <= middle_index and r_ptr <= end_index:
+        if xs[l_ptr] > xs[r_ptr]:
+            aux.append(xs[r_ptr])
+            r_ptr += 1
+            continue
+        aux.append(xs[l_ptr])
+        l_ptr += 1
+
+    while l_ptr <= middle_index:
+        aux.append(xs[l_ptr])
+        l_ptr += 1
+
+    while r_ptr <= end_index:
+        aux.append(xs[r_ptr])
+        r_ptr += 1
+
+    for i, a in enumerate(aux, start=start_index):
+        xs[i] = a
+
+
+def top_down_merge_sort(xs: list[int], size: int) -> None:
+    __top_down_merge_sort(xs, 0, size - 1)
+
+
+def selection_sort(xs: list[int], size: int) -> None:
+    for offset in range(size - 1):
+        sm_val: int = xs[offset]
+        sm_idx: int = offset
+        for i in range(offset + 1, size):
+            if sm_val > xs[i]:
+                sm_val = xs[i]
+                sm_idx = i
+        temp = xs[offset]
+        xs[offset] = sm_val
+        xs[sm_idx] = temp
+
+
 def main() -> None:
-    k = [7, 5, 3, 2, 1]
+    k = [7, 5, 3, 2, 1, 17]
     # max_selection_sort(k, 5)
     # print(merge_sort(k, 5))
-    bubble_sort(k, 5)
+    # bubble_sort(k, 5)
+
+    # top_down_merge_sort(k, 6)
+    insertion_sort(k, 6)
+
     print(k)
 
 
