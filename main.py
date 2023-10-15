@@ -35,14 +35,13 @@ def bubble_sort(xs: list[int], size: int) -> None:
 
 def insertion_sort(xs: list[int], size: int) -> None:
     for p_idx in range(1, size):
-        p_val: int = xs[p_idx]
-
         i: int = p_idx
 
-        while i > 0 and xs[i - 1] > p_val:
+        while i > 0 and xs[i - 1] > xs[i]:
+            temp = xs[i]
             xs[i] = xs[i - 1]
+            xs[i - 1] = temp
             i -= 1
-        xs[i] = p_val
 
 
 def __top_down_merge_sort(
