@@ -1,6 +1,7 @@
 # https://codeforces.com/problemset/problem/1352/C
 
 from typing import List
+from math import floor, ceil
 
 # from math import loor
 
@@ -48,35 +49,18 @@ from typing import List
 # (7 97)
 
 
-def solve(n: int, k: int) -> int:
-    if k == 1:
-        return 1
-    if n == 2:
-        return (2 * k) - 1
+def solve(k: int, n: int) -> int:
+    # if k == 1:
+    #     return 1
+    # if n == 2:
+    #     return (2 * k) - 1
 
-    return k + ((k - 1) // (n - 1))
+    # return k + ((k - 1) // (n - 1))
 
-    # not_divisible: List[int] = []
-    # curr: int = k
-    # while len(not_divisible) < k:
-    #     if curr % n != 0:
-    #         not_divisible.append(curr)
-    #     curr += 1
-    # return not_divisible[len(not_divisible) - 1]
+    bn: int = ceil(n / (k - 1))
+    cn: int = k - (n - ((k - 1) * (bn - 1)))
 
-    # counter: int = 0
-    # curr: int = 0
-    # while counter < k:
-    #     curr += 1
-    #     if curr % n != 0:
-    #         counter += 1
-    # return curr
-
-    # return term + (term // modulo)
-    # ls: List[List[int]] = [[x, x + 1] for x in range(1, k + 2, 2)]
-    # if k % 2 == 1:
-    #     return ls[len(ls) - 1][0]
-    # return ls[len(ls) - 2][1]
+    return (k * bn) - cn
 
 
 def main() -> None:
@@ -84,10 +68,10 @@ def main() -> None:
     result: List[int] = []
     for _ in range(t):
         nk: List[int] = list(map(int, input().split()))
-        n: int = nk[0]
-        k: int = nk[1]
+        k: int = nk[0]
+        n: int = nk[1]
 
-        result.append(solve(n, k))
+        result.append(solve(k, n))
 
     for r in result:
         print(r)
@@ -95,3 +79,43 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
+    # k = 3
+
+    # c1 = 2
+    # # c1 = 3 - 1
+    # # c1 = 3 - floor(1/1)
+
+    # c2 = 1
+    # # c2 = 3 - 2
+    # # c2 = 3 - floor(2/1)
+
+    # c3 = 2
+    # # c3 = 3 - 1
+    # # c3 = 3 - floor(3/2)
+
+    # c4 = 1
+    # # c4 = 3 - 2
+    # # c4 = 3 - floor(4/2)
+
+    # c5 = 2
+    # # c5 = 3 - 1
+    # # c5 = 3 - floor(5/3)
+
+
+# k = 7
+
+# c1 = 6
+# # c1 = 7 - 1
+
+# c2 = 5
+# # c2 = 7 - 2
+
+# c6 = 1
+# # c2 = 7 - 6
+
+# c7 = 6
+# c7 = 7 - 1
+
+# c8 = 5
+# c8 = 7 - 2
