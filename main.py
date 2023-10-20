@@ -114,14 +114,74 @@ def selection_sort(xs: list[int], size: int) -> None:
         xs[sm_idx] = temp
 
 
+def heapsort_construct(
+    xs: list[int], size: int, parent_index: int
+) -> None:
+    while (2 * parent_index) + 1 < size:
+        left_child_index: int = (2 * parent_index) + 1
+        target_child: int = left_child_index
+
+        if (left_child_index + 1 < size) and (
+            xs[left_child_index] < xs[left_child_index + 1]
+        ):
+            target_child += 1
+
+        if xs[parent_index] >= xs[target_child]:
+            return
+
+        temp: int = xs[parent_index]
+        xs[parent_index] = xs[target_child]
+        xs[target_child] = temp
+
+        parent_index = target_child
+
+
+def heapsort_init_heap(xs: list[int], size: int) -> None:
+    for i in reversed(range(size)):
+        heapsort_construct(xs, size, i)
+
+
+def heapsort(xs: list[int], size: int) -> None:
+    heapsort_init_heap(xs, size)
+
+    for i in reversed(range(1, size)):
+        temp = xs[0]
+        xs[0] = xs[i]
+        xs[i] = temp
+
+        heapsort_construct(xs, i, 0)
+
+
 def main() -> None:
-    k = [7, 5, 3, 2, 1, 17]
+    k = [
+        12,
+        3,
+        7,
+        17,
+        5,
+        2,
+        1,
+        6,
+        11,
+        14,
+        15,
+        9,
+        18,
+        4,
+        16,
+        13,
+        20,
+        19,
+        10,
+        8,
+    ]
     # max_selection_sort(k, 5)
     # print(merge_sort(k, 5))
     # bubble_sort(k, 5)
 
     # top_down_merge_sort(k, 6)
-    insertion_sort(k, 6)
+    # insertion_sort(k, 6)
+    heapsort(k, 20)
 
     print(k)
 
