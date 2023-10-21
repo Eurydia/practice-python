@@ -103,14 +103,12 @@ def top_down_merge_sort(xs: list[int], size: int) -> None:
 
 def selection_sort(xs: list[int], size: int) -> None:
     for offset in range(size - 1):
-        sm_val: int = xs[offset]
         sm_idx: int = offset
         for i in range(offset + 1, size):
-            if sm_val > xs[i]:
-                sm_val = xs[i]
+            if xs[sm_idx] > xs[i]:
                 sm_idx = i
         temp = xs[offset]
-        xs[offset] = sm_val
+        xs[offset] = xs[sm_idx]
         xs[sm_idx] = temp
 
 
@@ -181,7 +179,8 @@ def main() -> None:
 
     # top_down_merge_sort(k, 6)
     # insertion_sort(k, 6)
-    heapsort(k, 20)
+    # heapsort(k, 20)
+    selection_sort(k, 20)
 
     print(k)
 
