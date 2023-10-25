@@ -1,32 +1,32 @@
 # https://codeforces.com/problemset/problem/455/A
 
 from typing import List, Dict
+from collections import Counter
 
-lookup: Dict[int, int] = {}
 
+def solve(as_: List[int], score: int) -> int:
+    if len(as_) == 0:
+        return score
 
-def solve(n: int) -> int:
-    # if n not in lookup:
-    #     return 0
+    new_list: List[int] = []
 
-    if n == 1:
-        if n in lookup:
-            return lookup[1]
-        return 0
+    target: int = as_[0]
+    current_score: int = score
+    for a in as_:
+        if a == target:
+            current_score += a
+            continue
+        if a in (target - 1, target + 1):
+            continue
+        new_list.append(a)
 
-    return max(solve(n - 1), solve(n - 2) + lookup[n] * n)
+    return solve(new_list, current_score)
 
 
 def main() -> None:
     n: int = int(input())
-    a: List[int] = list(map(int, input().split()))
-
-    for ak in a:
-        if ak not in lookup:
-            lookup[ak] = 1
-        else:
-            lookup[ak] += 1
-    print(solve(n))
+    as_: List[int] = list(map(int, input().split()))
+    print(solve(as_, 0))
 
 
 # 3 3 4 4 5
