@@ -9,7 +9,7 @@ def getPermutationsWithoutRep(A: Set[int]) -> List[Tuple[int, ...]]:
 def main() -> None:
     A: Set[int] = {1, 2, 3, 4, 5}
 
-    print(f"Permutations: {getPermutations(A)}")
+    print(f"Permutations: {permutations(A)}")
 
 
 if __name__ == "__main__":
