@@ -4,6 +4,7 @@
     },
     "python.formatting.provider": "none",
     "files.associations": {
-        "*.sage": "python"
+        "*.sage": "python",
+        "*.ipynb": "python"
     }
 }
